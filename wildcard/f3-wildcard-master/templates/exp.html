@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<title>F3-Round#2</title>
+	<style>
+	.container{
+	width:100%;
+	}
+	.progressbar{
+		counter-reset:step;
+	}
+	.progressbar li{
+		list-style-type:none;
+		float:left;
+		width:20%;
+		position:relative;
+		text-align:center;
+	}
+	.progressbar li:before{
+		content: counter(step);
+		counter-increment:step;
+		width:40px;
+		height:40px;
+		line-height:34px;
+		border:1px solid #ddd;
+		display:block;
+		text-align:center;
+		margin:0 auto 10px auto;
+		border-radius:50%;
+		background-color:white;
+	}
+	.progressbar li:after
+	{
+		content:'';
+		position:absolute;
+		width:100%;
+		height:1px;
+		background-color:#ddd;
+		top:15px;
+		left:-50%;
+		z-index:-1;
+	}
+	.progressbar li:first-child:after{
+		content:none;
+	}
+	.progressbar li.active{
+		color:green;
+	}
+	.progressbar li.active:before{
+		border-color:green;
+	}
+	.progressbar li.active + li:after{
+		background-color:green;
+	}
+	.progressbar li.current{
+		color:#ff0000;
+	}
+	.progressbar li.current:before{
+		border-color:#ff0000;
+	}
+	</style>
+	<script type="text/javascript">
+	function ftest(){
+		var id=document.getElementById("hidden").value;
+		document.getElementById("hidden").value=document.getElementById("cell2Input").value;
+		var id1=document.getElementById("hidden").value;
+		document.getElementById("hidden3").value=document.getElementById("timer").innerHTML;
+		console.log(document.getElementById("timer").innerHTML);
+		
+	}
+	function ftest1(){
+		document.getElementById("finish").value=document.getElementById("timer").innerHTML;
+	}
+	</script>
+	<script>
+
+	</script>
+  </head>
+  <div>
+   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="">Find,Fit,Finish</a>	
+	<ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="#" id="timer">50:36</a>
+    </li>
+	</ul>
+	<ul class="navbar-nav ml-auto">
+			<li class="navbar-item ml-auto">
+				<form id='form1' action="/submitAnswer" method='POST'>
+					<input type="hidden" name="hidden" value="hidden" id="hidden">
+					<input type="hidden" name="hidden2" value="hidden2" id="hidden2">
+					<input type="hidden" name="hidden3" value="hidden3" id="hidden3">
+
+			<input type="submit" class="btn btn-danger" onclick="ftest()" name="Finish Test" value="Finish Test">
+			</form>
+			</li>
+		</ul>
+
+	</nav>
+	</br>
+	<!--Stepper starts here-->
+	<div class="container">
+		<ul class="progressbar">
+		<!--For the progress bar change the below active and current class attributes-->
+
+            {% if qdata['qno']==1 %}
+		<li class="current">Question 1</li>
+		<li class="">Question 2</li>
+		<li class="">Question 3</li>
+		<li class="">Question 4</li>
+		<li class="">Question 5</li>
+            {% endif %}
+
+            {% if qdata['qno']==2 %}
+		<li class="active">Question 1</li>
+		<li class="current">Question 2</li>
+		<li class="">Question 3</li>
+		<li class="">Question 4</li>
+		<li class="">Question 5</li>
+            {% endif %}
+
+            {% if qdata['qno']==3 %}
+		<li class="active">Question 1</li>
+		<li class="active">Question 2</li>
+		<li class="current">Question 3</li>
+		<li class="">Question 4</li>
+		<li class="">Question 5</li>
+            {% endif %}
+
+            {% if qdata['qno']==4 %}
+		<li class="active">Question 1</li>
+		<li class="active">Question 2</li>
+		<li class="active">Question 3</li>
+		<li class="current">Question 4</li>
+		<li class="">Question 5</li>
+            {% endif %}
+
+            {% if qdata['qno']==5 %}
+		<li class="active">Question 1</li>
+		<li class="active">Question 2</li>
+		<li class="active">Question 3</li>
+		<li class="active">Question 4</li>
+		<li class="current">Question 5</li>
+            {% endif %}
+		</ul>
+        <br><br><br><br>
+	</div>
+
+	<!--Stepper code ends here-->
+   <div class="container container-fluid">
+	<div class="row">
+   <div class="col-md-3">
+	<div class="card mb-4 box-shadow" style="height:500px;width:250px;margin-right:190px;">
+        <div class="card-header" style="background-color:#f5f5f5;">
+          <h4 class="my-0 font-weight-normal">Score</h4>
+        </div>
+        <div class="card-body d-flex flex-column">
+        <p style="border:5px double #00A591;border-radius:50%;padding:50px;text-align:center;color:black;">Total Score:{{ qdata['totalScore'] }}</p>
+		</div>
+      </div>
+	</div>
+
+	<!--Card starts here-->
+<div class="col-md-5">
+	<div class="card mb-4 box-shadow" style="height:500px;width:650px;">
+        <form id="myform" action="/submitAnswer" method="POST" >
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">Question {{ qdata['qno'] }} </h4>
+        </div>
+        <div class="card-body d-flex flex-column">
+          <!-- <h5 class="card-title" style="font-size: 200%">Reverse Text</h5> -->
+            {% for i in qdata %}
+            {% if i=='question' %}
+          <p class="card-text" style="font-size:100%;text-align:left;">{{ qdata[i] }}</p>
+            {% endif %}
+            {% endfor %}
+
+
+		  <input type="text" name="userAns"  id="cell2Input" style="margin-bottom:20px;">
+		  <input type="hidden" name="finish" value="finish" id="finish">
+		  
+          <input type="Submit" onclick="ftest1()" class="btn btn-primary" name="submit" value="Submit" id="cell2Button1">
+            
+          <br>
+          <span id="2FunctionResult"></span>
+
+        </form>
+
+      <center>
+        <form action="/obtainHint" method="POST">
+                {% if qdata['hintstatus']=='empty' %}
+
+		  <input type="Submit" class="btn btn-warning" name="Hint" value="Hint" id="cell2Button" >
+                {% endif %}
+                {% if qdata['hintstatus']=='hint1' %}
+                <div class="alert alert-warning" style="height:50px;"><p><strong>Hint1: </strong><span>{{ qdata['hint1'] }}</span></p></div>
+		  <input type="Submit" class="btn btn-warning" name="Hint" value="Hint" id="cell2Button" >
+                {% endif %}
+                {% if qdata['hintstatus']=='hint2' %}
+               <div class="alert alert-warning" style="height:50px;"><p><strong>Hint1: </strong><span>{{ qdata['hint1'] }}</span></p></div>
+                <div class="alert alert-warning" style="height:50px;"><p><strong>Hint2: </strong><span>{{ qdata['hint2'] }}</span></p></div>
+
+                {% endif %}
+            </form>
+
+
+      </center>
+    </div>
+    </div>
+    </div>
+	<!--Card ends here-->
+
+
+   <div class="col-md-4">
+	<div class="card mb-4 box-shadow" style="height:500px;width:250px;margin-left:190px;">
+        <div class="card-header" style="background-color:#f5f5f5;">
+          <h4 class="my-0 font-weight-normal">Progress</h4>
+        </div>
+        <div class="card-body d-flex flex-column">
+		<p style="border:5px double #92B558;border-radius:70%;padding:45px;text-align:center;color:black;" >Max Score: {{ qdata['score'] }}</p></br>
+		<p style="border:5px double #4F84C4;border-radius:70%;padding:50px;text-align:center;color:black;">Estimated: {{ qdata['scoreObtained'] }}</p>
+        </div>
+      </div>
+	</div>
+   </div>
+  </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static',filename='timerFinal6.js') }}"></script>
+
+  </body>
+</html>
