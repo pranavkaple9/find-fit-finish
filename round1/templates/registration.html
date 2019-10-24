@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Registration</title>
+	<style>
+	#mygrad
+	{
+		background-image:linear-gradient(to right,#cc2b5e,#753a88);
+	}
+	image{
+	height:100%;
+	margin-bottom:0%;
+	}
+	#descp{
+	color:white;
+	}
+	#desc1{
+	margin:5%;
+	}
+	#myimg{
+	border-radius:115px;
+	}
+    #myfooter{
+        background-color: #F7DEFC;
+        padding:15px;
+        }
+	</style>
+    <script type="text/javascript">
+     var TxtRotate = function(el, toRotate, period) {
+ this.toRotate = toRotate;
+ this.el = el;
+ this.loopNum = 0;
+ this.period = parseInt(period, 10) || 2;
+ this.txt = '';
+ this.tick();
+ this.isDeleting = false;
+};
+TxtRotate.prototype.tick = function() {
+ var i = this.loopNum % this.toRotate.length;
+ var fullTxt = this.toRotate[i];
+ if (this.isDeleting) {
+   this.txt = fullTxt.substring(0, this.txt.length - 1);
+ } else {
+   this.txt = fullTxt.substring(0, this.txt.length + 1);
+ }
+ this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+ var that = this;
+ var delta = 30 - Math.random() * 10;
+ if (this.isDeleting) { delta /= 2; }
+ if (!this.isDeleting && this.txt === fullTxt) {
+   delta = this.period;
+   this.isDeleting = true;
+ } else if (this.isDeleting && this.txt === '') {
+   this.isDeleting = false;
+   this.loopNum++;
+   delta = 500;
+ }
+ setTimeout(function() {
+   that.tick();
+ }, delta);
+};
+window.onload = function() {
+ var elements = document.getElementsByClassName('txt-rotate');
+ for (var i=0; i<elements.length; i++) {
+   var toRotate = elements[i].getAttribute('data-rotate');
+   var period = elements[i].getAttribute('data-period');
+   if (toRotate) {
+     new TxtRotate(elements[i], JSON.parse(toRotate), period);
+   }
+ }
+ // INJECT CSS
+ var css = document.createElement("style");
+ css.type = "text/css";
+ css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #fff }";
+ document.body.appendChild(css);
+};
+        
+        function validateEmail(){
+        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        var emailField=document.getElementById("email").value;
+        if (reg.test(emailField) == false) 
+        {
+            alert('Invalid Email Address');
+            
+        }
+        };
+function validateMobile(){
+        var reg = /^[0-9]{10}$/;
+        var phField=document.getElementById("mobnum").value;
+        if (reg.test(phField) == false) 
+        {
+            alert('Invalid Phone Number');
+            
+        }
+        };
+   </script>
+      
+  </head>
+  <body>
+  <div class="row">
+	<div class="col-md-8" id="mygrad">
+		<div id="descp">
+           <center><h1 class = "display-4" > <span
+ 		    class="txt-rotate"
+     		data-period="100000"
+     		data-rotate='[ "Find Fit Finish"]'></span>
+     	  </h1>
+            <h1 class = "display-5" > <span
+ 		    class="txt-rotate"
+     		data-period="1000"
+     		data-rotate='[ "Think out of the box","This Headstart 2019","This September 13 & 14"]'></span>
+     	  </h1></center>
+            <center><img src="/static/sprint_image.jpg" title="F3" alt="magnifying glass" id="myimg"></center>
+			<p id="desc1">
+			Are  you an enthusiastic  who wants  to solve things which are out of box,  Are you the one who wants something more than just technical knowledge, Then come and join  us at our event F3 (Find  Fit Finish ) where you doesn’t need much of your technical knowledge when  your  wit and logical thinking will get you to the success.
+This is an event where you can have lots  of fun and meet new people. Then why wait for one when you can join us at CBIT for this entertaining logical rollercoaster.<br>
+                        
+                        <b>Find</b> through clues<br>
+
+                        <b>Fit</b> with accurate logic<br>
+
+                            <b>Finish</b> them all to win First<br>
+    
+                There are three rounds in  this  event, They are<br>
+                
+                <b>Logical Quiz</b> :This is  the round which tests your GK and logical thinking.<br>
+
+                <b>Google it  Out</b>: You think you can google your questions  faster than others then this is the round  for you find your answers as fast as possible to win this round.<br>
+
+                <b>InterKnack:</b>  This is the knockout round which tests your patience  your team coordinatiion to survive the elimination<br> 
+
+                So dont wait up we are waiting for you come and join us on 13th and 14th of this September to have <b>Fun, Freak and break your Frustration</b> with #F3
+            </p>
+      <p style="font-size: 25px;font-weight:bold;">Register and Attempt Round-1 Now.</p></p>
+		</div>
+	</div>
+	<div class="col-md-4" >
+		  <form class="form-horizontal" action="http://localhost:5000/register" id="myform" method="POST">
+		  </br>
+		  <h3>Registration Form</h3>
+		  <div class="form-group">
+			<label class="control-label col-sm-2" for="name">Name:</label>
+			<div class="col-sm-10">
+			  <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name" required>
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label class="control-label col-sm-2" for="email">Email:</label>
+			<div class="col-sm-10">
+			  <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" onchange="validateEmail()" required>
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label class="control-label col-sm-2" for="mobnum">Mobile:</label>
+			<div class="col-sm-10"> 
+			  <input type="text" class="form-control" id="mobnum" placeholder="Enter Mobile Number" name="mobile" onchange="validateMobile()" required>
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label class="control-label col-sm-2" for="clg">College:</label>
+			<div class="col-sm-10"> 
+			  <input type="text" class="form-control" id="clg" placeholder="Enter college name" name="college" required>
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label class="control-label col-sm-2" for="clg">Branch:</label>
+			<div class="col-sm-10"> 
+			  <input type="text" class="form-control" id="branch" placeholder="Enter Branch" name="branch" required>
+			</div>
+		  </div>
+          <div class="form-group">
+			<label class="control-label col-sm-2" for="clg">Year:</label>
+			<div class="col-sm-10"> 
+			  <input type="text" class="form-control" id="year" placeholder="Enter Year" name="year" required>
+			</div>
+		  </div>
+		  <div class="form-group"> 
+			<div class="col-sm-offset-2 col-sm-10">
+			  <button type="submit" class="btn btn-danger">Submit</button>
+			</div>
+		  </div>
+		  </br>
+		  </br>
+		  </br>
+		  </br>
+		  </br>
+		</form>
+	</div>
+	</div>
+    <div class="page-footer" id="myfooter">
+    <center><h4>Contact Info:</h4>
+        <a href="#">Tanuj: 8464996832</a></br>
+        <a href="#">Meghana: 9398423500</a>
+        <p>&copy Find,Fit&ampFinish 2019</p>
+        </center>
+</div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+       <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/stylish-portfolio.min.js"></script>
+  </body>
+</html>
